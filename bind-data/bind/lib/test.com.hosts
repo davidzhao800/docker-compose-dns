@@ -1,0 +1,10 @@
+$ttl 38400
+test.com.	IN	SOA	localhost. admin.localhost. (
+			1463130152
+			10800
+			3600
+			604800
+			38400 )
+test.com.	IN	NS	localhost.
+test.com.	IN	A	123.123.123.123
+www.test.com.	IN	A	123.123.123.123

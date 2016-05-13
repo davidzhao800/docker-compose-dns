@@ -1,0 +1,36 @@
+version: '2'
+
+services:
+
+  bind:
+    image: sameersbn/bind:latest
+    ports:
+      - "53:53/udp"
+      - "10000:10000"
+    volumes:
+      - ./bind-data:/data
+    restart: always
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.101
+
+  test:
+    image: ubuntu:latest
+    links: 
+      - bind
+    dns:
+      - 172.16.238.101
+    command: bash
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.100
+
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.238.0/24
+        gateway: 172.16.238.1
+
